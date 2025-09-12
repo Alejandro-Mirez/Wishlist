@@ -1,11 +1,12 @@
 import { useRef } from "react";
 
-function AddWish({ onAddWish }) {
+function AddWish({ onAddWish, onCancel }) {
 	const inputRef = useRef(null);
 	const handleCancel = () => {
 		if (inputRef.current) {
 			inputRef.current.value = "";
 		}
+		if (onCancel) onCancel();
 	};
 	return (
 		<div>

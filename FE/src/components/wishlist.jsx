@@ -4,9 +4,13 @@ import ReleaseBtn from "./releaseBtn";
 import TakeBtn from "./takeBtn";
 import EditWish from "./editWishForm";
 import axios from "axios";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 	const userId = localStorage.getItem("userId");
+	const [showEditWishForm, setShowEditWishForm] = useState(false);
+
 	const groupedWishes = otherWishes.reduce((acc, wish) => {
 		const owner = wish.owner.username;
 		if (!acc[owner]) {
@@ -26,6 +30,7 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 				}
 			);
 			setRefreshToggle((refreshToggle) => !refreshToggle);
+			setShowEditWishForm(false);
 		} catch (error) {
 			console.log(error);
 		}
@@ -63,17 +68,37 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 		}
 	};
 
+	const showEditAlert = () => {
+		Swal.fire({
+			icon: "warning",
+			title: "Warning",
+			text: "If your wish has been taken, it will be released after editing",
+			showCancelButton: true,
+		}).then((result) => {
+			if (result.isConfirmed) {
+				setShowEditWishForm(true);
+			}
+		});
+	};
+
 	return (
 		<div>
 			<h2>Your Wishes</h2>
 			{yourWishes.map((wish) => (
 				<div key={wish._id}>
 					<Wish key={wish._id} name={wish.wish} takenBy="" />
-					<EditWish
-						onEditWish={handleEditWish}
-						wishId={wish._id}
-						currentWish={wish.wish}
-					/>
+					{!showEditWishForm && (
+						<button onClick={() => showEditAlert()}>Edit</button>
+					)}
+
+					{showEditWishForm && (
+						<EditWish
+							onEditWish={handleEditWish}
+							onCancel={() => setShowEditWishForm(false)}
+							wishId={wish._id}
+							currentWish={wish.wish}
+						/>
+					)}
 
 					<DeleteBtn
 						wishId={wish._id}

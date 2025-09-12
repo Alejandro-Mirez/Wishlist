@@ -7,7 +7,7 @@ import AddWish from "./addWishForm";
 function Dashboard({ setIsLoggedIn }) {
 	const [yourWishes, setYourWishes] = useState([]);
 	const [otherWishes, setOtherWishes] = useState([]);
-
+	const [showAddWishForm, setShowAddWishForm] = useState(false);
 	const [refreshToggle, setRefreshToggle] = useState(false);
 
 	useEffect(() => {
@@ -29,7 +29,6 @@ function Dashboard({ setIsLoggedIn }) {
 	const handleAddWish = async (formData) => {
 		const userId = localStorage.getItem("userId");
 		const newWish = formData.get("newWish");
-		console.log(newWish);
 		try {
 			await axios.post(
 				"http://localhost:3002/wishes/",
@@ -38,7 +37,7 @@ function Dashboard({ setIsLoggedIn }) {
 					withCredentials: true,
 				}
 			);
-
+			setShowAddWishForm(false);
 			setRefreshToggle((refreshToggle) => !refreshToggle);
 		} catch (error) {
 			console.log(error);
@@ -52,7 +51,18 @@ function Dashboard({ setIsLoggedIn }) {
 				otherWishes={otherWishes}
 				setRefreshToggle={setRefreshToggle}
 			/>
-			<AddWish onAddWish={handleAddWish} />
+			{!showAddWishForm && (
+				<button onClick={() => setShowAddWishForm(true)}>
+					Add new wish
+				</button>
+			)}
+
+			{showAddWishForm && (
+				<AddWish
+					onAddWish={handleAddWish}
+					onCancel={() => setShowAddWishForm(false)}
+				/>
+			)}
 			<Logout setIsLoggedIn={setIsLoggedIn} />
 		</div>
 	);

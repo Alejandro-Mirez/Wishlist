@@ -4,13 +4,15 @@ const getWishes = async (req, res) => {
 	try {
 		const userId = req.userData?.id;
 		if (userId) {
-			const yourWishes = await Wish.find({ owner: userId }).populate(
-				"owner",
-				"username"
-			);
+			const yourWishes = await Wish.find(
+				{ owner: userId },
+				"-state -takenBy"
+			).populate("owner", "username");
+
 			const otherWishes = await Wish.find({ owner: { $ne: userId } })
 				.populate("owner", "username")
 				.populate("takenBy", "username");
+
 			res.status(200).json({
 				message: "Wishes fetched successfully",
 				yourWishes,
@@ -36,7 +38,9 @@ const addWish = async (req, res) => {
 				wish,
 				owner: userId,
 			});
-			return res.status(201).json({ message: "Wish created", newWish });
+			return res
+				.status(201)
+				.json({ message: "Wish created successfully", newWish });
 		} else {
 			return res.status(401).json({
 				message: "Invalid or expired token. Please log in again",
@@ -53,19 +57,22 @@ const deleteWish = async (req, res) => {
 	const userId = req.userData?.id;
 	try {
 		if (userId) {
-			const deletedWish = await Wish.findOneAndDelete({
-				owner: userId,
-				_id: wishId,
-			});
+			const deletedWish = await Wish.findOneAndDelete(
+				{
+					owner: userId,
+					_id: wishId,
+				},
+				{ projection: { state: 0, takenBy: 0 } }
+			);
 			if (!deletedWish) {
 				return res
-					.status(500)
-					.json({ message: "Server error: delete wish" });
+					.status(404)
+					.json({ message: "Wish not found or already deleted" });
 			}
 
 			return res
 				.status(200)
-				.json({ message: "Wish deleted: ", deletedWish });
+				.json({ message: "Wish deleted successfully", deletedWish });
 		} else {
 			return res.status(401).json({
 				message: "Invalid or expired token. Please log in again",
@@ -90,7 +97,7 @@ const editWish = async (req, res) => {
 			);
 			return res
 				.status(200)
-				.json({ message: "Wish updated successfully: ", updatedWish });
+				.json({ message: "Wish updated successfully", updatedWish });
 		} else {
 			return res.status(401).json({
 				message: "Invalid or expired token. Please log in again",
