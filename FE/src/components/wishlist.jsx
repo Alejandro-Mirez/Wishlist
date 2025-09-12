@@ -1,0 +1,118 @@
+import DeleteBtn from "./deleteBtn";
+import Wish from "./wish";
+import ReleaseBtn from "./releaseBtn";
+import TakeBtn from "./takeBtn";
+import EditWish from "./editWishForm";
+import axios from "axios";
+
+function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
+	const userId = localStorage.getItem("userId");
+	const groupedWishes = otherWishes.reduce((acc, wish) => {
+		const owner = wish.owner.username;
+		if (!acc[owner]) {
+			acc[owner] = [];
+		}
+		acc[owner].push(wish);
+		return acc;
+	}, {});
+
+	const handleEditWish = async (editedWish, wishId) => {
+		try {
+			await axios.put(
+				`http://localhost:3002/wishes/${wishId}`,
+				{ editedWish },
+				{
+					withCredentials: true,
+				}
+			);
+			setRefreshToggle((refreshToggle) => !refreshToggle);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const handleTake = async (wishId) => {
+		try {
+			await axios.put(
+				`http://localhost:3002/wishes/${wishId}/take`,
+				{},
+
+				{
+					withCredentials: true,
+				}
+			);
+			setRefreshToggle((refreshToggle) => !refreshToggle);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const handleRelease = async (wishId) => {
+		try {
+			await axios.put(
+				`http://localhost:3002/wishes/${wishId}/free`,
+				{},
+
+				{
+					withCredentials: true,
+				}
+			);
+			setRefreshToggle((refreshToggle) => !refreshToggle);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	return (
+		<div>
+			<h2>Your Wishes</h2>
+			{yourWishes.map((wish) => (
+				<div key={wish._id}>
+					<Wish key={wish._id} name={wish.wish} takenBy="" />
+					<EditWish
+						onEditWish={handleEditWish}
+						wishId={wish._id}
+						currentWish={wish.wish}
+					/>
+
+					<DeleteBtn
+						wishId={wish._id}
+						setRefreshToggle={setRefreshToggle}
+					/>
+				</div>
+			))}
+
+			<h2>Other Wishes</h2>
+			{Object.entries(groupedWishes).map(([owner, wishes]) => (
+				<div key={owner}>
+					<h3>{owner}</h3>
+					<ul>
+						{wishes.map((wish) => (
+							<li key={wish._id}>
+								<Wish
+									name={wish.wish}
+									takenBy={wish.takenBy?.username}
+								/>
+								{wish.state === "taken" &&
+									wish.takenBy?._id === userId && (
+										<ReleaseBtn
+											onRelease={handleRelease}
+											wishId={wish._id}
+										/>
+									)}
+								{wish.state === "free" && (
+									<TakeBtn
+										onTake={handleTake}
+										wishId={wish._id}
+									/>
+								)}
+							</li>
+						))}
+					</ul>
+				</div>
+			))}
+		</div>
+	);
+}
+
+export default Wishlist;
