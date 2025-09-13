@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Signup({ setIsLoggedIn }) {
 	const navigate = useNavigate();
@@ -18,26 +19,33 @@ function Signup({ setIsLoggedIn }) {
 			);
 			const response = JSON.parse(raw.request.response);
 			localStorage.setItem("userId", response.userId);
+			localStorage.setItem("username", username);
 			setIsLoggedIn(true);
-			navigate("/");
+			Swal.fire({
+				title: "Welcome!",
+				timer: 800,
+				showConfirmButton: false,
+			}).then(() => navigate("/"));
 		} catch (error) {
 			switch (error.status) {
 				case 400:
-					alert(error.response.data.message);
+					Swal.fire(error.response.data.message);
 					break;
 				case 500:
-					alert(error.response.data.message);
+					Swal.fire(error.response.data.message);
 					break;
 				default:
-					return <h3> Unexpected error </h3>;
+					Swal.fire(
+						"An unexpected error occurred, please try again later"
+					);
 			}
 		}
 	}
 	return (
-		<div>
+		<div className="container">
 			<h1> Sign up</h1>
-			<form action={signup}>
-				<label htmlFor="username"> Username </label>
+			<form action={signup} className="form">
+				<label htmlFor="username">Username</label>
 				<input
 					type="text"
 					id="username"

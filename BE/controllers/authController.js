@@ -19,7 +19,9 @@ const registerUser = async (req, res) => {
 
 		const userExists = await User.findOne({ username });
 		if (userExists) {
-			return res.status(400).json({ message: "Username already taken" });
+			return res.status(400).json({
+				message: "Username already taken, please choose another one",
+			});
 		}
 
 		const hashedPassword = await bcrypt.hash(password, 10);

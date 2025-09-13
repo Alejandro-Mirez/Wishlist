@@ -34,9 +34,18 @@ function Logout({ setIsLoggedIn }) {
 			navigate("/login");
 		} catch (error) {
 			console.log(error);
+			Swal.fire("An unexpected error occurred, please try again later");
 		}
 	};
-	return <button onClick={showLogoutAlert}> Log out</button>;
+	const username = localStorage.getItem("username");
+	return (
+		<div className="footer">
+			<button onClick={showLogoutAlert} className="logoutBtn">
+				Log out
+			</button>
+			<p className="loggedInAs"> You're logged in as: {username} </p>
+		</div>
+	);
 }
 
 export default Logout;

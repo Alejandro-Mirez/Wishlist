@@ -26,7 +26,12 @@ function DeleteBtn({ wishId, setRefreshToggle }) {
 			console.log(error);
 		}
 	};
-	return <button onClick={showDeleteAlert}> Delete</button>;
+	return (
+		<button onClick={showDeleteAlert} className="deleteBtn">
+			{" "}
+			Delete
+		</button>
+	);
 }
 
 export default DeleteBtn;

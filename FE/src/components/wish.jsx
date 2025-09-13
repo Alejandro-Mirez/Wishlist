@@ -1,8 +1,10 @@
 function Wish({ name, takenBy }) {
 	return (
 		<div>
-			<p>{name}</p>
-			<p> {takenBy ? "wish taken by: " + takenBy : ""} </p>
+			<p className="wishName">{name}</p>
+			<p className="state">
+				{takenBy ? "wish taken by: " + takenBy : ""}
+			</p>
 		</div>
 	);
 }

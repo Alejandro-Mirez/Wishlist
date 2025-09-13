@@ -61,6 +61,12 @@ function App() {
 					path="/signup"
 					element={<Signup setIsLoggedIn={setIsLoggedIn} />}
 				/>
+				<Route
+					path="*"
+					element={
+						<div> Not Found or You do not have permission.</div>
+					}
+				/>
 			</Routes>
 		</Router>
 	);

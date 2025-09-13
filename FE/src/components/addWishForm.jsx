@@ -10,20 +10,31 @@ function AddWish({ onAddWish, onCancel }) {
 	};
 	return (
 		<div>
-			<form action={onAddWish}>
-				<label htmlFor="newWish"> Write your wish </label>
-				<input
-					type="text"
-					id="newWish"
-					name="newWish"
-					required
-					placeholder="I wish for..."
-					ref={inputRef}
-				></input>
-				<button type="submit"> Ok</button>
-				<button type="button" onClick={handleCancel}>
-					Cancel
-				</button>
+			<form action={onAddWish} className="form addWishForm">
+				<label htmlFor="newWish" className="addLabel">
+					Write your wish
+				</label>
+				<div className="inputs">
+					<input
+						type="text"
+						id="newWish"
+						name="newWish"
+						required
+						placeholder="I wish for..."
+						ref={inputRef}
+					></input>
+
+					<button type="submit" className="okBtn">
+						Ok
+					</button>
+					<button
+						type="button"
+						onClick={handleCancel}
+						className="cancelBtn"
+					>
+						Cancel
+					</button>
+				</div>
 			</form>
 		</div>
 	);

@@ -2,12 +2,12 @@ import Logout from "./logout";
 import Wishlist from "./wishlist";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import AddWish from "./addWishForm";
+import Swal from "sweetalert2";
 
 function Dashboard({ setIsLoggedIn }) {
 	const [yourWishes, setYourWishes] = useState([]);
 	const [otherWishes, setOtherWishes] = useState([]);
-	const [showAddWishForm, setShowAddWishForm] = useState(false);
+
 	const [refreshToggle, setRefreshToggle] = useState(false);
 
 	useEffect(() => {
@@ -21,49 +21,25 @@ function Dashboard({ setIsLoggedIn }) {
 				setOtherWishes(response.otherWishes);
 			} catch (error) {
 				console.log(error);
+				Swal.fire(
+					"An unexpected error occurred, please try again later"
+				);
 			}
 		};
 		getWishlist();
 	}, [refreshToggle]);
 
-	const handleAddWish = async (formData) => {
-		const userId = localStorage.getItem("userId");
-		const newWish = formData.get("newWish");
-		try {
-			await axios.post(
-				"http://localhost:3002/wishes/",
-				{ newWish, userId },
-				{
-					withCredentials: true,
-				}
-			);
-			setShowAddWishForm(false);
-			setRefreshToggle((refreshToggle) => !refreshToggle);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
 	return (
 		<div>
+			<div className="heading">
+				<Logout setIsLoggedIn={setIsLoggedIn} />
+				<h1 className="pageTitle"> Wishlist</h1>
+			</div>
 			<Wishlist
 				yourWishes={yourWishes}
 				otherWishes={otherWishes}
 				setRefreshToggle={setRefreshToggle}
 			/>
-			{!showAddWishForm && (
-				<button onClick={() => setShowAddWishForm(true)}>
-					Add new wish
-				</button>
-			)}
-
-			{showAddWishForm && (
-				<AddWish
-					onAddWish={handleAddWish}
-					onCancel={() => setShowAddWishForm(false)}
-				/>
-			)}
-			<Logout setIsLoggedIn={setIsLoggedIn} />
 		</div>
 	);
 }

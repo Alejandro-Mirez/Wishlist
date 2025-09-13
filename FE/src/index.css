@@ -1,68 +1,221 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+	color-scheme: light dark;
+	color: rgba(255, 255, 255, 0.87);
+	background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.heading {
+	display: flex;
+	height: 15vh;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.logoutBtn {
+	align-self: flex-end;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.loggedInAs {
+	align-self: flex-end;
+	position: absolute;
+	top: 40px;
+	right: 10px;
+	font-size: small;
+}
+
+.wishlistContainer {
+	display: flex;
+	flex-direction: row;
+	height: 85vh;
+	width: 100vw;
+}
+:-webkit-scrollbar {
+	display: none;
+}
+
+.wishes {
+	display: flex;
+	flex-direction: column;
+	width: 50vw;
+	align-items: center;
+	overflow-y: scroll;
+}
+
+.userWishes {
+	border: solid rgba(0, 0, 0, 0.248) 3px;
+	width: 30vw;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 10px;
+	max-height: 400px;
+	overflow-y: scroll;
+	flex-shrink: 0;
+}
+
+.yourWishlist {
+	padding-top: 10px;
+	width: 30vw;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 10px;
+}
+
+.owner {
+	padding-left: 10px;
+	background-color: #646cff4f;
+	display: flex;
+	justify-content: center;
+	font-size: x-large;
+	position: sticky;
+	top: 0;
+}
+
+.editForm {
+	background-color: #242424;
+	padding-left: 10px;
+}
+
+.logoutBtn,
+.deleteBtn,
+.cancelBtn {
+	background-color: rgb(84, 4, 4);
+}
+
+.logoutBtn {
+	height: 50px;
+}
+
+.addBtn,
+.okBtn {
+	background-color: rgb(5, 61, 5);
+}
+
+.title {
+	font-size: xx-large;
+}
+
+.oneWish {
+	background-color: #ffffff3b;
+	margin-bottom: 10px;
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+.wishName {
+	font-weight: bold;
+}
+
+.state {
+	color: #d9dfe49d;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+}
+
+.editForm,
+.addWishForm {
+	display: flex;
+	flex-direction: column;
+	border: solid rgba(0, 0, 0, 0.227);
+}
+
+.addWishForm {
+	padding-left: 10px;
+}
+
+.editLabel,
+.addLabel {
+	flex-direction: row;
+	font-size: small;
+	color: #646cff7a;
+}
+
+.inputs {
+	flex-direction: row;
+}
+
+input {
+	margin-bottom: 10px;
+	padding: 10px;
+	width: 200px;
+	font-size: medium;
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+	font-weight: 500;
+	color: #646cff;
+	text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+	color: #535bf2;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+	margin: 0;
+	min-width: 320px;
+	min-height: 100vh;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+	font-size: 3.2em;
+	line-height: 1.1;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+	border-radius: 8px;
+	border: 1px solid transparent;
+	padding: 0.6em 1.2em;
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: #1a1a1a;
+	cursor: pointer;
+	transition: border-color 0.25s;
+	margin: 5px;
 }
 button:hover {
-  border-color: #646cff;
+	border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+	outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+	:root {
+		color: #213547;
+		background-color: #ffffff;
+	}
+	a:hover {
+		color: #747bff;
+	}
+	button {
+		background-color: #f9f9f9;
+	}
 }
