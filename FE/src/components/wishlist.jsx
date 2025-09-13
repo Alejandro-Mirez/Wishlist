@@ -7,6 +7,7 @@ import axios from "axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import AddWish from "./addWishForm";
+import ShoppingList from "./shoppingList";
 
 function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 	const userId = localStorage.getItem("userId");
@@ -141,51 +142,56 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 					</div>
 				))}
 			</div>
-			<div className="wishes yourWishes">
-				<h2 className="title">Your Wishes</h2>
-				{!showAddWishForm && (
-					<button
-						onClick={() => setShowAddWishForm(true)}
-						className="addBtn"
-					>
-						Add new wish
-					</button>
-				)}
+			<div className="yourPart">
+				<div className="yourWishes">
+					<h2 className="title">Your Wishes</h2>
+					{!showAddWishForm && (
+						<button
+							onClick={() => setShowAddWishForm(true)}
+							className="addBtn"
+						>
+							Add new wish
+						</button>
+					)}
 
-				{showAddWishForm && (
-					<AddWish
-						onAddWish={handleAddWish}
-						onCancel={() => setShowAddWishForm(false)}
-					/>
-				)}
-				<div className="yourWishlist">
-					{yourWishes.map((wish) => (
-						<div key={wish._id} className="oneWish">
-							{editingWishId !== wish._id && (
-								<Wish name={wish.wish} takenBy="" />
-							)}
-							{editingWishId !== wish._id && (
-								<button onClick={() => showEditAlert(wish._id)}>
-									Edit
-								</button>
-							)}
+					{showAddWishForm && (
+						<AddWish
+							onAddWish={handleAddWish}
+							onCancel={() => setShowAddWishForm(false)}
+						/>
+					)}
+					<div className="yourWishlist">
+						{yourWishes.map((wish) => (
+							<div key={wish._id} className="oneWish">
+								{editingWishId !== wish._id && (
+									<Wish name={wish.wish} takenBy="" />
+								)}
+								{editingWishId !== wish._id && (
+									<button
+										onClick={() => showEditAlert(wish._id)}
+									>
+										Edit
+									</button>
+								)}
 
-							{editingWishId === wish._id && (
-								<EditWish
-									onEditWish={handleEditWish}
-									onCancel={() => setEditingWishId(null)}
+								{editingWishId === wish._id && (
+									<EditWish
+										onEditWish={handleEditWish}
+										onCancel={() => setEditingWishId(null)}
+										wishId={wish._id}
+										currentWish={wish.wish}
+									/>
+								)}
+
+								<DeleteBtn
 									wishId={wish._id}
-									currentWish={wish.wish}
+									setRefreshToggle={setRefreshToggle}
 								/>
-							)}
-
-							<DeleteBtn
-								wishId={wish._id}
-								setRefreshToggle={setRefreshToggle}
-							/>
-						</div>
-					))}
+							</div>
+						))}
+					</div>
 				</div>
+				<ShoppingList groupedWishes={groupedWishes} userId={userId} />
 			</div>
 		</div>
 	);
