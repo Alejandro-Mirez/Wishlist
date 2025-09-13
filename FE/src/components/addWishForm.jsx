@@ -22,6 +22,7 @@ function AddWish({ onAddWish, onCancel }) {
 						required
 						placeholder="I wish for..."
 						ref={inputRef}
+						autoFocus
 					></input>
 
 					<button type="submit" className="okBtn">

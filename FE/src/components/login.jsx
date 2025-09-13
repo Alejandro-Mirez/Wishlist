@@ -58,6 +58,7 @@ function Login({ setIsLoggedIn }) {
 					name="username"
 					required
 					placeholder="username"
+					autoFocus
 				></input>
 				<label htmlFor="password">Password</label>
 				<input

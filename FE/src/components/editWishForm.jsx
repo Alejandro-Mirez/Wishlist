@@ -28,6 +28,7 @@ function EditWish({ onEditWish, wishId, currentWish, onCancel }) {
 						required
 						defaultValue={currentWish}
 						ref={inputRef}
+						autoFocus
 					/>
 					<button type="submit" className="okBtn">
 						Ok
