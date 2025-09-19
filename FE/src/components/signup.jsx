@@ -2,9 +2,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 function Signup({ setIsLoggedIn }) {
 	const navigate = useNavigate();
+
+	const [visibleU, setVisibleU] = useState(false);
+	const [visibleP, setVisibleP] = useState(false);
+
 	async function signup(formData) {
 		const username = formData.get("username").trim();
 		const password = formData.get("password").trim();
@@ -45,7 +50,16 @@ function Signup({ setIsLoggedIn }) {
 		<div className="container">
 			<h1> Sign up</h1>
 			<form action={signup} className="form">
-				<label htmlFor="username">Username</label>
+				<label htmlFor="username">
+					Username{" "}
+					<b
+						onMouseEnter={() => setVisibleU(true)}
+						onMouseLeave={() => setVisibleU(false)}
+					>
+						*
+					</b>
+					{visibleU && <b> required</b>}
+				</label>
 				<input
 					type="text"
 					id="username"
@@ -54,7 +68,17 @@ function Signup({ setIsLoggedIn }) {
 					placeholder="username"
 					autoFocus
 				></input>
-				<label htmlFor="password"> Password </label>
+				<label htmlFor="password">
+					{" "}
+					Password{" "}
+					<b
+						onMouseEnter={() => setVisibleP(true)}
+						onMouseLeave={() => setVisibleP(false)}
+					>
+						*
+					</b>
+					{visibleP && <b> required</b>}{" "}
+				</label>
 				<input
 					type="password"
 					id="password"

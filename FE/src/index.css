@@ -13,6 +13,10 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+b {
+	color: crimson;
+}
+
 .container {
 	display: flex;
 	flex-direction: column;
