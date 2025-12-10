@@ -1,0 +1,6 @@
+- unit tests
+- selenium tests / playwright tests
+- mark with colour wishes taken by self
+- checkboxes in Shopping list
+- refactor structure
+- make small screen friendly

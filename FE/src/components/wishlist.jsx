@@ -1,7 +1,6 @@
 import DeleteBtn from "./deleteBtn";
+import UserWishes from "./userWishes";
 import Wish from "./wish";
-import ReleaseBtn from "./releaseBtn";
-import TakeBtn from "./takeBtn";
 import EditWish from "./editWishForm";
 import axios from "axios";
 import { useState } from "react";
@@ -13,6 +12,7 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 	const userId = localStorage.getItem("userId");
 	const [editingWishId, setEditingWishId] = useState(null);
 	const [showAddWishForm, setShowAddWishForm] = useState(false);
+	const [showUserWishes, setShowUserWishes] = useState(null);
 
 	const groupedWishes = otherWishes.reduce((acc, wish) => {
 		const owner = wish.owner.username;
@@ -53,40 +53,6 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 		});
 	};
 
-	const handleTake = async (wishId) => {
-		try {
-			await axios.put(
-				`http://localhost:3002/wishes/${wishId}/take`,
-				{},
-
-				{
-					withCredentials: true,
-				}
-			);
-			setRefreshToggle((refreshToggle) => !refreshToggle);
-		} catch (error) {
-			console.log(error);
-			Swal.fire("An unexpected error occurred, please try again later");
-		}
-	};
-
-	const handleRelease = async (wishId) => {
-		try {
-			await axios.put(
-				`http://localhost:3002/wishes/${wishId}/free`,
-				{},
-
-				{
-					withCredentials: true,
-				}
-			);
-			setRefreshToggle((refreshToggle) => !refreshToggle);
-		} catch (error) {
-			console.log(error);
-			Swal.fire("An unexpected error occurred, please try again later");
-		}
-	};
-
 	const handleAddWish = async (formData) => {
 		const userId = localStorage.getItem("userId");
 		const newWish = formData.get("newWish");
@@ -106,39 +72,33 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 	};
 
 	return (
-		<div className="wishlistContainer">
+		<div
+			className={
+				showUserWishes ? "wishlistContainer blur" : "wishlistContainer"
+			}
+			onClick=""
+		>
 			<div className="wishes otherWishes">
-				<h2 className="title">Other Wishes</h2>
+				<h2 className="title">Gift Group</h2>
 				{Object.entries(groupedWishes).map(([owner, wishes]) => (
-					<div key={owner} className="userWishes">
-						<h3 className="owner">{owner}</h3>
-						<div>
-							{wishes.map((wish) => (
-								<div key={wish._id} className="oneWish">
-									<Wish
-										name={wish.wish}
-										takenBy={
-											wish.takenBy?._id === userId
-												? "you"
-												: wish.takenBy?.username
-										}
-									/>
-									{wish.state === "taken" &&
-										wish.takenBy?._id === userId && (
-											<ReleaseBtn
-												onRelease={handleRelease}
-												wishId={wish._id}
-											/>
-										)}
-									{wish.state === "free" && (
-										<TakeBtn
-											onTake={handleTake}
-											wishId={wish._id}
-										/>
-									)}
-								</div>
-							))}
-						</div>
+					<div key={owner} className="userList">
+						<h3
+							className="owner"
+							onClick={() => setShowUserWishes(owner)}
+						>
+							{owner}
+						</h3>
+						{showUserWishes === owner && (
+							<UserWishes
+								owner={owner}
+								wishes={wishes}
+								userId={userId}
+								setRefreshToggle={setRefreshToggle}
+								onExit={() => {
+									setShowUserWishes(null);
+								}}
+							/>
+						)}
 					</div>
 				))}
 			</div>
@@ -146,12 +106,12 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 				<div className="yourWishes">
 					<h2 className="title">Your Wishes</h2>
 					{!showAddWishForm && (
-						<button
+						<img
 							onClick={() => setShowAddWishForm(true)}
 							className="addBtn"
-						>
-							Add new wish
-						</button>
+							src="http://localhost:5173/add.svg"
+							alt="Add"
+						/>
 					)}
 
 					{showAddWishForm && (
@@ -162,31 +122,44 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 					)}
 					<div className="yourWishlist">
 						{yourWishes.map((wish) => (
-							<div key={wish._id} className="oneWish">
+							<div key={wish._id} className="yourWish">
 								{editingWishId !== wish._id && (
 									<Wish name={wish.wish} takenBy="" />
 								)}
-								{editingWishId !== wish._id && (
-									<button
-										onClick={() => showEditAlert(wish._id)}
-									>
-										Edit
-									</button>
-								)}
+								<div>
+									<div className="controls">
+										{editingWishId !== wish._id && (
+											<img
+												src={
+													"http://localhost:5173/edit.svg"
+												}
+												onClick={() =>
+													showEditAlert(wish._id)
+												}
+												alt="Edit"
+											/>
+										)}
+										{editingWishId !== wish._id && (
+											<DeleteBtn
+												wishId={wish._id}
+												setRefreshToggle={
+													setRefreshToggle
+												}
+											/>
+										)}
+									</div>
 
-								{editingWishId === wish._id && (
-									<EditWish
-										onEditWish={handleEditWish}
-										onCancel={() => setEditingWishId(null)}
-										wishId={wish._id}
-										currentWish={wish.wish}
-									/>
-								)}
-
-								<DeleteBtn
-									wishId={wish._id}
-									setRefreshToggle={setRefreshToggle}
-								/>
+									{editingWishId === wish._id && (
+										<EditWish
+											onEditWish={handleEditWish}
+											onCancel={() =>
+												setEditingWishId(null)
+											}
+											wishId={wish._id}
+											currentWish={wish.wish}
+										/>
+									)}
+								</div>
 							</div>
 						))}
 					</div>
