@@ -4,3 +4,4 @@
 - checkboxes in Shopping list
 - refactor structure
 - make small screen friendly
+-blabla
