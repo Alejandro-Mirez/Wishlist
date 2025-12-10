@@ -6,3 +6,5 @@
 - make small screen friendly
 -blabla
 -blabla
+
+kurrrrr
