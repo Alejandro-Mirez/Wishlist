@@ -83,8 +83,14 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 				{Object.entries(groupedWishes).map(([owner, wishes]) => (
 					<div key={owner} className="userList">
 						<h3
+							tabIndex={0}
 							className="owner"
 							onClick={() => setShowUserWishes(owner)}
+							onKeyUp={(e) => {
+								if (e.code === "Enter" || e.code === "Space") {
+									setShowUserWishes(owner);
+								}
+							}}
 						>
 							{owner}
 						</h3>
@@ -106,12 +112,15 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 				<div className="yourWishes">
 					<h2 className="title">Your Wishes</h2>
 					{!showAddWishForm && (
-						<img
+						<button
 							onClick={() => setShowAddWishForm(true)}
 							className="addBtn"
-							src="http://localhost:5173/add.svg"
-							alt="Add"
-						/>
+						>
+							<img
+								src="http://localhost:5173/add.svg"
+								alt="Add"
+							/>
+						</button>
 					)}
 
 					{showAddWishForm && (
@@ -129,15 +138,18 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 								<div>
 									<div className="controls">
 										{editingWishId !== wish._id && (
-											<img
-												src={
-													"http://localhost:5173/edit.svg"
-												}
+											<button
 												onClick={() =>
 													showEditAlert(wish._id)
 												}
-												alt="Edit"
-											/>
+											>
+												<img
+													src={
+														"http://localhost:5173/edit.svg"
+													}
+													alt="Edit"
+												/>
+											</button>
 										)}
 										{editingWishId !== wish._id && (
 											<DeleteBtn

@@ -8,8 +8,20 @@ import { useEffect, useRef } from "react";
 
 function UserWishes({ owner, userId, wishes, setRefreshToggle, onExit }) {
 	const wrapperRef = useRef(null);
+	const modalRef = useRef(null);
 
 	useEffect(() => {
+		if (!modalRef.current) return;
+		const focusable = modalRef.current.querySelectorAll("button");
+		let first = null;
+		let last = null;
+		if (focusable.length > 0) {
+			first = focusable[0];
+			last = focusable[focusable.length - 1];
+
+			first.focus();
+		}
+
 		function handleClickOutside(event) {
 			if (
 				wrapperRef.current &&
@@ -19,14 +31,34 @@ function UserWishes({ owner, userId, wishes, setRefreshToggle, onExit }) {
 			}
 		}
 
+		function handleKeyDown(e) {
+			if (e.key === "Escape") {
+				onExit();
+			}
+
+			if (e.shiftKey && document.activeElement === first) {
+				e.preventDefault();
+				last.focus();
+			}
+
+			if (!e.shiftKey && document.activeElement === last) {
+				e.preventDefault();
+				first.focus();
+			}
+
+			if (focusable.length === 0 && e.key === "Tab") {
+				e.preventDefault();
+			}
+		}
 		document.addEventListener("pointerdown", handleClickOutside, true);
-		return () =>
-			document.removeEventListener(
-				"pointerdown",
-				handleClickOutside,
-				true
-			);
-	}, [onExit]);
+		document.addEventListener("keydown", handleKeyDown);
+
+		return () => {
+			document.removeEventListener("keydown", handleKeyDown);
+			document.removeEventListener("keydown", handleKeyDown);
+		};
+	}, [wishes, onExit]);
+
 	const handleTake = async (wishId) => {
 		try {
 			await axios.put(
@@ -63,7 +95,7 @@ function UserWishes({ owner, userId, wishes, setRefreshToggle, onExit }) {
 
 	return createPortal(
 		<div ref={wrapperRef} className="userWishesContainer">
-			<div className="userWishes">
+			<div ref={modalRef} className="userWishes">
 				<h3 className="owner">{owner}</h3>
 				{wishes.map((wish) => (
 					<div key={wish._id} className="oneWish">

@@ -36,15 +36,11 @@ function Login({ setIsLoggedIn }) {
 			switch (error.status) {
 				case 400:
 				case 401:
-					Swal.fire(error.response.data.message);
-					break;
 				case 404:
-					Swal.fire(error.response.data.message);
-					navigate("/signup");
-					break;
 				case 500:
 					Swal.fire(error.response.data.message);
 					break;
+
 				default:
 					return <h3> Unexpected error </h3>;
 			}

@@ -73,11 +73,11 @@ const loginUser = async (req, res) => {
 		) {
 			return res
 				.status(401)
-				.json({ message: "Please check your credentials" });
+				.json({ message: "Invalid usename or password" });
 		} else if (!userFound) {
 			return res
 				.status(404)
-				.json({ message: "User does not exist, please sign up" });
+				.json({ message: "Invalid usename or password" });
 		}
 	} catch (error) {
 		console.log(error);

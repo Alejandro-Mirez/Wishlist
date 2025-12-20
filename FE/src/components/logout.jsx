@@ -40,12 +40,13 @@ function Logout({ setIsLoggedIn }) {
 	const username = localStorage.getItem("username");
 	return (
 		<div>
-			<img
-				onClick={showLogoutAlert}
-				className="logoutBtn"
-				src={"http://localhost:5173/logout.svg"}
-				alt="Logout"
-			/>
+			<button onClick={showLogoutAlert} className="logoutBtn">
+				<img
+					src={"http://localhost:5173/logout.svg"}
+					alt="Logout"
+					className="logoutIcon"
+				/>
+			</button>
 			<p className="loggedInAs"> You're logged in as: {username} </p>
 		</div>
 	);
