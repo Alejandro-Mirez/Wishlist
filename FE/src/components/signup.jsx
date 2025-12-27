@@ -48,50 +48,52 @@ function Signup({ setIsLoggedIn }) {
 	}
 	return (
 		<div className="container">
-			<h1> Sign up</h1>
-			<form action={signup} className="form">
-				<label htmlFor="username">
-					Username{" "}
-					<b
-						onMouseEnter={() => setVisibleU(true)}
-						onMouseLeave={() => setVisibleU(false)}
-					>
-						*
-					</b>
-					{visibleU && <b> required</b>}
-				</label>
-				<input
-					type="text"
-					id="username"
-					name="username"
-					required
-					placeholder="username"
-					autoFocus
-				></input>
-				<label htmlFor="password">
-					{" "}
-					Password{" "}
-					<b
-						onMouseEnter={() => setVisibleP(true)}
-						onMouseLeave={() => setVisibleP(false)}
-					>
-						*
-					</b>
-					{visibleP && <b> required</b>}{" "}
-				</label>
-				<input
-					type="password"
-					id="password"
-					name="password"
-					required
-					placeholder="password"
-					minLength="8"
-				></input>
-				<button type="submit"> Sign up</button>
-			</form>
-			<h3>
-				Already have an account? <Link to="/login">Log in</Link>
-			</h3>
+			<div className="formContainer">
+				<h1> Sign up</h1>
+				<form action={signup} className="form">
+					<label htmlFor="username">
+						Username{" "}
+						<b
+							onMouseEnter={() => setVisibleU(true)}
+							onMouseLeave={() => setVisibleU(false)}
+						>
+							*
+						</b>
+						{visibleU && <b> required</b>}
+					</label>
+					<input
+						type="text"
+						id="username"
+						name="username"
+						required
+						placeholder="username"
+						autoFocus
+					></input>
+					<label htmlFor="password">
+						{" "}
+						Password{" "}
+						<b
+							onMouseEnter={() => setVisibleP(true)}
+							onMouseLeave={() => setVisibleP(false)}
+						>
+							*
+						</b>
+						{visibleP && <b> required</b>}{" "}
+					</label>
+					<input
+						type="password"
+						id="password"
+						name="password"
+						required
+						placeholder="password"
+						minLength="8"
+					></input>
+					<button type="submit"> Sign up</button>
+				</form>
+				<h3>
+					Already have an account? <Link to="/login">Log in</Link>
+				</h3>
+			</div>
 		</div>
 	);
 }

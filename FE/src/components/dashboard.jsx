@@ -31,10 +31,7 @@ function Dashboard({ setIsLoggedIn }) {
 
 	return (
 		<div>
-			<div className="heading">
-				<Logout setIsLoggedIn={setIsLoggedIn} />
-				<h1 className="pageTitle"> Wishlist</h1>
-			</div>
+			<Logout setIsLoggedIn={setIsLoggedIn} />
 			<Wishlist
 				yourWishes={yourWishes}
 				otherWishes={otherWishes}

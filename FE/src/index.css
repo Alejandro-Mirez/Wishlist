@@ -13,25 +13,62 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+html {
+	font-size: calc(1.5rem + 2vw);
+}
+
 b {
 	color: crimson;
 }
 
 .container {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
 	justify-content: center;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
+	margin-top: 0.3rem;
+}
+
+.formContainer {
+	align-items: center;
+	flex-direction: column;
+	display: flex;
+	width: 30%;
+	min-width: fit-content;
+	font-size: 0.3rem;
+	background-color: black;
+	border-radius: 8px;
+	padding: 0.3rem;
+}
+
+@media screen and (height > 1080px) {
+	.container {
+		margin-top: 2rem;
+	}
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 0.2rem;
+}
+
+input {
+	margin-bottom: 10px;
+	padding: 10px;
+	font-size: medium;
+	border-radius: 8px;
 }
 
 .heading {
 	display: flex;
-	height: 15vh;
 	justify-content: center;
 	align-items: center;
-	flex-direction: column;
+	margin: 0;
 }
+
+/* finished here */
 
 .logoutBtn {
 	position: absolute;
@@ -197,11 +234,6 @@ b {
 	color: #d9dfe49d;
 }
 
-.form {
-	display: flex;
-	flex-direction: column;
-}
-
 .editForm,
 .addWishForm {
 	display: flex;
@@ -226,14 +258,6 @@ b {
 	flex-direction: row;
 }
 
-input {
-	margin-bottom: 10px;
-	padding: 10px;
-	width: 200px;
-	font-size: medium;
-	border-radius: 8px;
-}
-
 a {
 	font-weight: 500;
 	color: #646cff;
@@ -245,17 +269,6 @@ a:hover {
 
 img {
 	border-radius: 8px;
-}
-
-body {
-	margin: 0;
-	min-width: 320px;
-	min-height: 100vh;
-}
-
-h1 {
-	font-size: 3.2em;
-	line-height: 1.1;
 }
 
 button {
