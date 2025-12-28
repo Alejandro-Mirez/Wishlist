@@ -24,17 +24,18 @@ function AddWish({ onAddWish, onCancel }) {
 						ref={inputRef}
 						autoFocus
 					></input>
-
-					<button type="submit" className="okBtn">
-						Ok
-					</button>
-					<button
-						type="button"
-						onClick={handleCancel}
-						className="cancelBtn"
-					>
-						Cancel
-					</button>
+					<div className="addControls">
+						<button type="submit" className="okBtn">
+							Ok
+						</button>
+						<button
+							type="button"
+							onClick={handleCancel}
+							className="cancelBtn"
+						>
+							Cancel
+						</button>
+					</div>
 				</div>
 			</form>
 		</div>

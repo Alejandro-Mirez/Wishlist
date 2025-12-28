@@ -88,7 +88,10 @@ function Signup({ setIsLoggedIn }) {
 						placeholder="password"
 						minLength="8"
 					></input>
-					<button type="submit"> Sign up</button>
+					<button type="submit" className="loginBtn">
+						{" "}
+						Sign up
+					</button>
 				</form>
 				<h3>
 					Already have an account? <Link to="/login">Log in</Link>

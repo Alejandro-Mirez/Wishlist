@@ -76,7 +76,6 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 			className={
 				showUserWishes ? "wishlistContainer blur" : "wishlistContainer"
 			}
-			onClick=""
 		>
 			<div className="wishes otherWishes">
 				<h2 className="title">Gift Group</h2>

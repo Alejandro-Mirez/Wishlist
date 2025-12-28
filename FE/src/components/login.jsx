@@ -87,7 +87,9 @@ function Login({ setIsLoggedIn }) {
 						required
 						placeholder="password"
 					></input>
-					<button type="submit">Log in</button>
+					<button type="submit" className="loginBtn">
+						Log in
+					</button>
 				</form>
 				<h3>
 					Don't have an account? <Link to="/signup"> Sign up</Link>

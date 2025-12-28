@@ -1,9 +1,8 @@
 function ShoppingList({ groupedWishes, userId }) {
 	return (
 		<div className="shoppingList">
-			<div className="sectionTitle">
-				<h2>Shopping list</h2>
-			</div>
+			<h2 className="title">Shopping list</h2>
+
 			{Object.entries(groupedWishes).map(([owner, wishes]) => {
 				const takenWishes = wishes.filter(
 					(wish) => wish.takenBy?._id === userId

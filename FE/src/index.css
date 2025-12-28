@@ -1,7 +1,5 @@
 :root {
 	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-	line-height: 1.5;
-	font-weight: 400;
 
 	color-scheme: light dark;
 	color: rgba(255, 255, 255, 0.87);
@@ -14,7 +12,7 @@
 }
 
 html {
-	font-size: calc(1.5rem + 2vw);
+	font-size: calc(1rem + 2vw);
 }
 
 b {
@@ -41,12 +39,6 @@ b {
 	padding: 0.3rem;
 }
 
-@media screen and (height > 1080px) {
-	.container {
-		margin-top: 2rem;
-	}
-}
-
 .form {
 	display: flex;
 	flex-direction: column;
@@ -55,10 +47,27 @@ b {
 }
 
 input {
-	margin-bottom: 10px;
-	padding: 10px;
+	margin: 0;
+	padding: 0.3rem;
 	font-size: medium;
 	border-radius: 8px;
+}
+
+.inputs {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.editControls,
+.addControls {
+	display: flex;
+}
+
+.loginBtn {
+	display: flex;
+	justify-content: center;
+	font-weight: bold;
 }
 
 .heading {
@@ -67,8 +76,6 @@ input {
 	align-items: center;
 	margin: 0;
 }
-
-/* finished here */
 
 .logoutBtn {
 	position: absolute;
@@ -80,7 +87,7 @@ input {
 .loggedInAs {
 	align-self: flex-end;
 	position: absolute;
-	top: 40px;
+	top: 1rem;
 	right: 10px;
 	font-size: small;
 }
@@ -88,57 +95,42 @@ input {
 .wishlistContainer {
 	display: flex;
 	flex-direction: row;
-	height: 85vh;
-	width: 100vw;
 }
 
 .wishes {
 	display: flex;
 	flex-direction: column;
-	width: 50vw;
 	align-items: center;
 	border-right: solid 1px white;
 }
 
 .yourWishes {
+	width: 31vw;
 	display: flex;
 	flex-direction: column;
-	width: 35vw;
-	align-items: center;
 	border-right: solid 1px white;
-}
-
-.ownerContainer {
-	display: flex;
-	flex-direction: column;
-	padding-left: 10px;
-}
-
-.sectionTitle {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	width: 100%;
+	padding-left: 0.3rem;
+	padding-right: 0.3rem;
+	margin-bottom: 0.3rem;
 }
 
 .shoppingList {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	width: 15vw;
+	width: 32vw;
 }
 
 .yourPart {
 	display: flex;
 	flex-direction: row;
 }
+
 .userList {
-	width: 30vw;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 10px;
-	max-height: 400px;
-	flex-shrink: 0;
+	width: 32vw;
+	padding-left: 0.3rem;
+	padding-right: 0.3rem;
+	margin-bottom: 0.3rem;
 }
 
 .userWishes {
@@ -150,38 +142,55 @@ input {
 	background-color: #242424;
 	border-radius: 8px;
 	border: solid white 1px;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-.yourWishlist {
-	padding-top: 10px;
-	width: 30vw;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 10px;
+	padding: 0 0.3rem 0.3rem 0.3rem;
 }
 
 .owner {
 	background-color: #646cff4f;
 	display: flex;
 	justify-content: center;
-	font-size: x-large;
-	top: 0;
+	font-size: large;
 	border-radius: 8px;
+}
+
+.ownerContainer {
+	padding-left: 0.3rem;
+}
+
+.ownerList {
+	margin: 0;
+}
+
+.ownerList,
+li {
+	font-size: large;
 }
 
 .userList > .owner {
 	cursor: pointer;
 }
 
+.yourWish > div {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.editContainer {
+	width: 100%;
+}
+
 .editForm {
 	background-color: #242424;
-	padding-left: 10px;
+	width: 100%;
 }
 
 .cancelBtn {
 	background-color: rgb(84, 4, 4);
+}
+
+.addBtn {
+	align-self: center;
 }
 
 .addBtn,
@@ -189,20 +198,17 @@ input {
 	background-color: rgb(5, 61, 5);
 }
 
-.addBtn {
-	height: 40px;
+.title {
+	font-size: large;
+	align-self: center; /* for shopping list title  specifically */
 }
 
-.title {
-	font-size: xx-large;
+ul {
+	margin: 0;
 }
 
 .oneWish {
 	background-color: #ffffff3b;
-	margin-bottom: 10px;
-	padding-top: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
 	display: flex;
 	flex-direction: column;
 	border-radius: 8px;
@@ -210,28 +216,22 @@ input {
 
 .yourWish {
 	background-color: #ffffff3b;
-	margin-bottom: 10px;
-	padding: 5px;
 	border-radius: 8px;
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 }
 
 .controls {
 	display: flex;
-	justify-content: space-between;
-	width: 3vw;
 }
 
 .wishName {
-	font-weight: bold;
-	margin: 0;
-	font-size: larger;
+	font-size: large;
 }
 
 .state {
 	color: #d9dfe49d;
+	font-size: large;
 }
 
 .editForm,
@@ -243,7 +243,6 @@ input {
 }
 
 .addWishForm {
-	padding-left: 10px;
 	border-radius: 8px;
 }
 
@@ -252,10 +251,6 @@ input {
 	flex-direction: row;
 	font-size: small;
 	color: white;
-}
-
-.inputs {
-	flex-direction: row;
 }
 
 a {
@@ -274,15 +269,16 @@ img {
 button {
 	border-radius: 8px;
 	border: 1px solid transparent;
-	padding: 0.6em 1.2em;
-	font-size: 1em;
-	font-weight: 500;
-	font-family: inherit;
+	padding: 0.3rem;
+	font-size: 0.3rem;
 	background-color: #1a1a1a;
 	cursor: pointer;
 	transition: border-color 0.25s;
-	margin: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
+
 button:hover {
 	border-color: #646cff;
 }
@@ -291,24 +287,26 @@ button:focus-visible {
 	outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-	:root {
-		color: #213547;
-		background-color: #ffffff;
-	}
-	a:hover {
-		color: #747bff;
-	}
-	button {
-		background-color: #f9f9f9;
-	}
-}
-
 .blur {
 	filter: blur(6px);
 }
 
 img {
-	height: 2vh;
-	width: auto;
+	height: 0.3rem;
+}
+
+.swal2-popup {
+	font-size: 0.3rem;
+}
+
+@media screen and (height > 1080px) {
+	.container {
+		margin-top: 2rem;
+	}
+	.title,
+	.owner,
+	.wishName,
+	.ownerList {
+		font-size: xx-large;
+	}
 }

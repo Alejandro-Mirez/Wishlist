@@ -14,7 +14,7 @@ function EditWish({ onEditWish, wishId, currentWish, onCancel }) {
 		if (onCancel) onCancel();
 	};
 	return (
-		<div>
+		<div className="editContainer">
 			<form action={handleSubmit} className="editForm">
 				<label htmlFor="editedWish" className="editLabel">
 					Edit your wish
@@ -30,16 +30,18 @@ function EditWish({ onEditWish, wishId, currentWish, onCancel }) {
 						ref={inputRef}
 						autoFocus
 					/>
-					<button type="submit" className="okBtn">
-						Ok
-					</button>
-					<button
-						type="button"
-						onClick={handleCancel}
-						className="cancelBtn"
-					>
-						Cancel
-					</button>
+					<div className="editControls">
+						<button type="submit" className="okBtn">
+							Ok
+						</button>
+						<button
+							type="button"
+							onClick={handleCancel}
+							className="cancelBtn"
+						>
+							Cancel
+						</button>
+					</div>
 				</div>
 			</form>
 		</div>
