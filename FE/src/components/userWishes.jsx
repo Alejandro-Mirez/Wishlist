@@ -96,7 +96,7 @@ function UserWishes({ owner, userId, wishes, setRefreshToggle, onExit }) {
 	return createPortal(
 		<div ref={wrapperRef} className="userWishesContainer">
 			<div ref={modalRef} className="userWishes">
-				<h3 className="owner">{owner}</h3>
+				<h3 className="owner modal">{owner}</h3>
 				{wishes.map((wish) => (
 					<div key={wish._id} className="oneWish">
 						<Wish

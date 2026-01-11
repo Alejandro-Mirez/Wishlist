@@ -79,33 +79,39 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 		>
 			<div className="wishes otherWishes">
 				<h2 className="title">Gift Group</h2>
-				{Object.entries(groupedWishes).map(([owner, wishes]) => (
-					<div key={owner} className="userList">
-						<h3
-							tabIndex={0}
-							className="owner"
-							onClick={() => setShowUserWishes(owner)}
-							onKeyUp={(e) => {
-								if (e.code === "Enter" || e.code === "Space") {
-									setShowUserWishes(owner);
-								}
-							}}
-						>
-							{owner}
-						</h3>
-						{showUserWishes === owner && (
-							<UserWishes
-								owner={owner}
-								wishes={wishes}
-								userId={userId}
-								setRefreshToggle={setRefreshToggle}
-								onExit={() => {
-									setShowUserWishes(null);
+				<div>
+					{Object.entries(groupedWishes).map(([owner, wishes]) => (
+						<div key={owner} className="userList">
+							<h3
+								tabIndex={0}
+								className="owner"
+								onClick={() => setShowUserWishes(owner)}
+								onKeyUp={(e) => {
+									if (
+										e.code === "Enter" ||
+										e.code === "Space"
+									) {
+										setShowUserWishes(owner);
+									}
 								}}
-							/>
-						)}
-					</div>
-				))}
+							>
+								{owner}
+							</h3>
+
+							{showUserWishes === owner && (
+								<UserWishes
+									owner={owner}
+									wishes={wishes}
+									userId={userId}
+									setRefreshToggle={setRefreshToggle}
+									onExit={() => {
+										setShowUserWishes(null);
+									}}
+								/>
+							)}
+						</div>
+					))}
+				</div>
 			</div>
 			<div className="yourPart">
 				<div className="yourWishes">
@@ -175,6 +181,7 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 						))}
 					</div>
 				</div>
+
 				<ShoppingList groupedWishes={groupedWishes} userId={userId} />
 			</div>
 		</div>
