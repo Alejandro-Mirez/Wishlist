@@ -8,8 +8,10 @@ const connectToDB = async (attempt = 1) => {
 	} catch (error) {
 		console.log(error);
 		if (attempt <= 3) {
-			console.log(`...retry attempt no ", ${attempt}...`);
+			console.log(`...retry attempt no ", ${attempt}/3...`);
 			setTimeout(() => connectToDB(attempt + 1), 3000);
+		} else {
+			console.log("3/3 retries not successful");
 		}
 	}
 };
