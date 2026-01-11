@@ -75,11 +75,13 @@ input {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	gap: 0.3rem;
 }
 
 .editControls,
 .addControls {
 	display: flex;
+	gap: 0.3rem;
 }
 
 .loginBtn {
@@ -196,16 +198,18 @@ li {
 	justify-content: flex-end;
 }
 
+.yourWish:has(.editContainer) {
+	border: 1px solid;
+	border-color: #646cff;
+}
+
 .editContainer {
 	width: 100%;
+	margin: 0.3rem 0 0.3rem 0;
 }
 
-.editForm {
-	background-color: #242424;
-	width: 100%;
-}
-
-.cancelBtn {
+.cancelBtn,
+.delBtn {
 	background-color: rgb(84, 4, 4);
 }
 
@@ -232,6 +236,8 @@ ul {
 	display: flex;
 	flex-direction: column;
 	border-radius: 8px;
+	margin-top: 0.3rem;
+	padding: 0.3rem;
 }
 
 .yourWish {
@@ -239,10 +245,14 @@ ul {
 	border-radius: 8px;
 	display: flex;
 	align-items: center;
+	margin-top: 0.3rem;
+	padding: 0 0.3rem 0 0.3rem;
 }
 
 .controls {
 	display: flex;
+
+	gap: 0.3rem;
 }
 
 .wishName {
@@ -258,7 +268,6 @@ ul {
 .addWishForm {
 	display: flex;
 	flex-direction: column;
-	border: solid #646cff4f;
 	border-radius: 8px;
 }
 
@@ -271,6 +280,10 @@ ul {
 	flex-direction: row;
 	font-size: small;
 	color: white;
+}
+
+.editLabel {
+	margin-bottom: 0.3rem;
 }
 
 a {
@@ -317,6 +330,9 @@ img {
 
 .swal2-popup {
 	font-size: 0.3rem;
+}
+input:not(#username, #password) {
+	width: 100%;
 }
 
 @media screen and (min-height: 1080px) {
@@ -433,10 +449,6 @@ img {
 
 	img {
 		height: 1rem;
-	}
-
-	input:not(#username, #password) {
-		width: 100%;
 	}
 
 	.links {

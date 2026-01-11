@@ -32,14 +32,20 @@ function EditWish({ onEditWish, wishId, currentWish, onCancel }) {
 					/>
 					<div className="editControls">
 						<button type="submit" className="okBtn">
-							Ok
+							<img
+								src={"http://localhost:5173/ok.svg"}
+								alt="Ok"
+							/>
 						</button>
 						<button
 							type="button"
 							onClick={handleCancel}
 							className="cancelBtn"
 						>
-							Cancel
+							<img
+								src={"http://localhost:5173/x.svg"}
+								alt="Cancel"
+							/>
 						</button>
 					</div>
 				</div>

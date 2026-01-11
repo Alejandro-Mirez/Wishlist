@@ -27,7 +27,7 @@ function DeleteBtn({ wishId, setRefreshToggle }) {
 		}
 	};
 	return (
-		<button onClick={showDeleteAlert}>
+		<button onClick={showDeleteAlert} className="delBtn">
 			<img src={"http://localhost:5173/delete.svg"} alt="Delete" />
 		</button>
 	);

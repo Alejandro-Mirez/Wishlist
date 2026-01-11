@@ -26,14 +26,20 @@ function AddWish({ onAddWish, onCancel }) {
 					></input>
 					<div className="addControls">
 						<button type="submit" className="okBtn">
-							Ok
+							<img
+								src={"http://localhost:5173/ok.svg"}
+								alt="Ok"
+							/>
 						</button>
 						<button
 							type="button"
 							onClick={handleCancel}
 							className="cancelBtn"
 						>
-							Cancel
+							<img
+								src={"http://localhost:5173/x.svg"}
+								alt="Cancel"
+							/>
 						</button>
 					</div>
 				</div>
