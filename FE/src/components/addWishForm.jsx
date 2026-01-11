@@ -9,7 +9,7 @@ function AddWish({ onAddWish, onCancel }) {
 		if (onCancel) onCancel();
 	};
 	return (
-		<div>
+		<div className="addWishContainer">
 			<form action={onAddWish} className="form addWishForm">
 				<label htmlFor="newWish" className="addLabel">
 					Write your wish
