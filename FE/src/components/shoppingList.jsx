@@ -1,6 +1,6 @@
 function ShoppingList({ groupedWishes, userId }) {
 	return (
-		<div className="shoppingList">
+		<div className="shoppingList" id="shoppingList">
 			<h2 className="title">Shopping list</h2>
 
 			{Object.entries(groupedWishes).map(([owner, wishes]) => {

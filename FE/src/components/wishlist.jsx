@@ -7,6 +7,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import AddWish from "./addWishForm";
 import ShoppingList from "./shoppingList";
+import Links from "./links";
 
 function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 	const userId = localStorage.getItem("userId");
@@ -77,7 +78,7 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 				showUserWishes ? "wishlistContainer blur" : "wishlistContainer"
 			}
 		>
-			<div className="wishes otherWishes">
+			<div className="wishes otherWishes" id="giftGroup">
 				<h2 className="title">Gift Group</h2>
 				<div>
 					{Object.entries(groupedWishes).map(([owner, wishes]) => (
@@ -114,7 +115,7 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 				</div>
 			</div>
 			<div className="yourPart">
-				<div className="yourWishes">
+				<div className="yourWishes" id="yourWishes">
 					<h2 className="title">Your Wishes</h2>
 					{!showAddWishForm && (
 						<button
@@ -184,6 +185,7 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 
 				<ShoppingList groupedWishes={groupedWishes} userId={userId} />
 			</div>
+			<Links />
 		</div>
 	);
 }

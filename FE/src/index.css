@@ -12,7 +12,6 @@
 
 #root {
 	height: 100%;
-	overflow: hidden;
 }
 
 #root > div {
@@ -27,6 +26,10 @@ body {
 	height: 100vh;
 	margin: 0;
 	padding: 0;
+}
+
+.links {
+	display: none;
 }
 
 b {
@@ -111,6 +114,7 @@ input {
 	display: flex;
 	flex-direction: row;
 	height: 100%;
+	overflow: scroll;
 }
 
 .wishes {
@@ -374,6 +378,7 @@ img {
 		width: 90%;
 		background-color: #363642;
 		padding: 0.7rem;
+		margin-bottom: 0.7rem;
 	}
 
 	.yourWishes {
@@ -389,6 +394,7 @@ img {
 		width: 90%;
 		align-self: center;
 		margin-bottom: 0.7rem;
+		margin-top: 0.7rem;
 	}
 
 	.otherWishes > div {
@@ -431,5 +437,16 @@ img {
 
 	input:not(#username, #password) {
 		width: 100%;
+	}
+
+	.links {
+		display: flex;
+		justify-content: space-between;
+		position: fixed;
+		bottom: 0;
+		background-color: #242424;
+		width: 97%;
+		padding: 0.3rem;
+		font-size: smaller;
 	}
 }
