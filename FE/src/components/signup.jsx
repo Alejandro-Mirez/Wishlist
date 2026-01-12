@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { handleError } from "../errorHandler";
 
 function Signup({ setIsLoggedIn }) {
 	const navigate = useNavigate();
@@ -33,18 +34,7 @@ function Signup({ setIsLoggedIn }) {
 				heightAuto: false,
 			}).then(() => navigate("/"));
 		} catch (error) {
-			switch (error.status) {
-				case 400:
-					Swal.fire(error.response.data.message);
-					break;
-				case 500:
-					Swal.fire(error.response.data.message);
-					break;
-				default:
-					Swal.fire(
-						"An unexpected error occurred, please try again later"
-					);
-			}
+			handleError(error);
 		}
 	}
 	return (

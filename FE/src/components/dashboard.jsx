@@ -2,6 +2,7 @@ import Logout from "./logout";
 import Wishlist from "./wishlist";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { handleError } from "../errorHandler";
 
 function Dashboard({ setIsLoggedIn }) {
 	const [yourWishes, setYourWishes] = useState([]);
@@ -19,7 +20,7 @@ function Dashboard({ setIsLoggedIn }) {
 				setYourWishes(response.yourWishes);
 				setOtherWishes(response.otherWishes);
 			} catch (error) {
-				console.log(error);
+				handleError(error);
 			}
 		};
 		getWishlist();

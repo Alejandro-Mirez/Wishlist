@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { handleError } from "../errorHandler";
 
 function Logout({ setIsLoggedIn }) {
 	const navigate = useNavigate();
@@ -34,7 +35,7 @@ function Logout({ setIsLoggedIn }) {
 			localStorage.removeItem("userId");
 			navigate("/login");
 		} catch (error) {
-			console.log(error);
+			handleError(error);
 		}
 	};
 	const username = localStorage.getItem("username");

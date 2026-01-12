@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import AddWish from "./addWishForm";
 import ShoppingList from "./shoppingList";
 import Links from "./links";
+import { handleError } from "../errorHandler";
 
 function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 	const userId = localStorage.getItem("userId");
@@ -36,8 +37,7 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 			setRefreshToggle((refreshToggle) => !refreshToggle);
 			setEditingWishId(null);
 		} catch (error) {
-			console.log(error);
-			Swal.fire("An unexpected error occurred, please try again later");
+			handleError(error);
 		}
 	};
 
@@ -69,7 +69,7 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 			setShowAddWishForm(false);
 			setRefreshToggle((refreshToggle) => !refreshToggle);
 		} catch (error) {
-			console.log(error);
+			handleError(error);
 		}
 	};
 

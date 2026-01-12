@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { handleError } from "../errorHandler";
 
 function Login({ setIsLoggedIn }) {
 	const navigate = useNavigate();
@@ -13,6 +14,7 @@ function Login({ setIsLoggedIn }) {
 	async function login(formData) {
 		const username = formData.get("username").trim();
 		const password = formData.get("password").trim();
+
 		try {
 			const raw = await axios.post(
 				"http://localhost:3002/auth/login",
@@ -33,18 +35,7 @@ function Login({ setIsLoggedIn }) {
 				heightAuto: false,
 			}).then(() => navigate("/"));
 		} catch (error) {
-			console.log(error);
-			switch (error.status) {
-				case 400:
-				case 401:
-				case 404:
-				case 500:
-					Swal.fire(error.response.data.message);
-					break;
-
-				default:
-					return <h3> Unexpected error </h3>;
-			}
+			handleError(error);
 		}
 	}
 

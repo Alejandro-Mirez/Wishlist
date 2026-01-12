@@ -1,5 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2";
+import { handleError } from "../errorHandler";
 
 function DeleteBtn({ wishId, setRefreshToggle }) {
 	const showDeleteAlert = () => {
@@ -24,7 +25,7 @@ function DeleteBtn({ wishId, setRefreshToggle }) {
 
 			setRefreshToggle((refreshToggle) => !refreshToggle);
 		} catch (error) {
-			console.log(error);
+			handleError(error);
 		}
 	};
 	return (

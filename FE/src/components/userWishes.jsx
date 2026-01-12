@@ -5,6 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { createPortal } from "react-dom";
 import { useEffect, useRef } from "react";
+import { handleError } from "../errorHandler";
 
 function UserWishes({ owner, userId, wishes, setRefreshToggle, onExit }) {
 	const wrapperRef = useRef(null);
@@ -71,8 +72,7 @@ function UserWishes({ owner, userId, wishes, setRefreshToggle, onExit }) {
 			);
 			setRefreshToggle((refreshToggle) => !refreshToggle);
 		} catch (error) {
-			console.log(error);
-			Swal.fire("An unexpected error occurred, please try again later");
+			handleError(error);
 		}
 	};
 
@@ -89,7 +89,7 @@ function UserWishes({ owner, userId, wishes, setRefreshToggle, onExit }) {
 			setRefreshToggle((refreshToggle) => !refreshToggle);
 		} catch (error) {
 			console.log(error);
-			Swal.fire("An unexpected error occurred, please try again later");
+			handleError(error);
 		}
 	};
 
