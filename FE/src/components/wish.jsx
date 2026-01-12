@@ -2,9 +2,12 @@ function Wish({ name, takenBy }) {
 	return (
 		<>
 			<p className="wishName">{name}</p>
-			<p className="state">
-				{takenBy ? "wish taken by: " + takenBy : ""}
-			</p>
+
+			{takenBy ? (
+				<p className="state"> wish taken by: {takenBy} </p>
+			) : (
+				<p className="state placeholder"> free wish </p>
+			)}
 		</>
 	);
 }

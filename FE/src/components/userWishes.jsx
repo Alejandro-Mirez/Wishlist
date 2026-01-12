@@ -98,7 +98,14 @@ function UserWishes({ owner, userId, wishes, setRefreshToggle, onExit }) {
 			<div ref={modalRef} className="userWishes">
 				<h3 className="owner modal">{owner}</h3>
 				{wishes.map((wish) => (
-					<div key={wish._id} className="oneWish">
+					<div
+						key={wish._id}
+						className={
+							wish.takenBy?._id === userId
+								? "takenByYou oneWish"
+								: "oneWish"
+						}
+					>
 						<Wish
 							name={wish.wish}
 							takenBy={

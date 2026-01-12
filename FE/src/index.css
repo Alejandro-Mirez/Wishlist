@@ -254,7 +254,8 @@ ul {
 }
 
 .oneWish {
-	background-color: #ffffff3b;
+	background-color: transparent;
+	border: solid 1px #ffffff3b;
 	display: flex;
 	flex-direction: column;
 	border-radius: 8px;
@@ -262,8 +263,13 @@ ul {
 	padding: 0.3rem;
 }
 
+.takenByYou {
+	background-color: rgba(5, 61, 5, 0.192);
+}
+
 .yourWish {
-	background-color: #ffffff3b;
+	background-color: rgba(5, 61, 5, 0.192);
+	border: solid 1px #ffffff3b;
 	border-radius: 8px;
 	display: flex;
 	align-items: center;
@@ -279,11 +285,16 @@ ul {
 
 .wishName {
 	font-size: large;
+	margin: 0.3rem 0 0.3rem 0;
 }
 
 .state {
 	color: #d9dfe49d;
 	font-size: large;
+}
+
+.placeholder {
+	color: transparent;
 }
 
 .editForm,
