@@ -47,6 +47,7 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 			title: "Warning",
 			text: "If your wish has been taken, it will be released after editing",
 			showCancelButton: true,
+			heightAuto: false,
 		}).then((result) => {
 			if (result.isConfirmed) {
 				setEditingWishId(wishId);

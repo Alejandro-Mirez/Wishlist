@@ -353,6 +353,39 @@ img {
 .swal2-popup {
 	font-size: 0.3rem;
 }
+
+.swal2-cancel {
+	background-color: #242424;
+	border: 1px solid transparent;
+}
+
+.swal2-cancel:hover {
+	background-color: #242424;
+	border-color: #646cff;
+}
+
+.swal2-confirm {
+	background-color: rgb(5, 61, 5);
+	border: 1px solid transparent;
+}
+
+.swal2-confirm:hover {
+	background-color: rgb(5, 61, 5);
+	border-color: #646cff;
+}
+
+.swal2-confirm:focus,
+.swal2-confirm:focus-visible,
+.swal2-cancel:focus,
+.swal2-cancel:focus-visible {
+	outline: 4px auto -webkit-focus-ring-color;
+}
+
+div:where(.swal2-icon).swal2-warning {
+	border-color: rgb(84, 4, 4) !important;
+	color: rgb(84, 4, 4) !important;
+}
+
 input:not(#username, #password) {
 	width: 100%;
 }

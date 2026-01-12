@@ -30,6 +30,7 @@ function Login({ setIsLoggedIn }) {
 				title: "Welcome back!",
 				timer: 800,
 				showConfirmButton: false,
+				heightAuto: false,
 			}).then(() => navigate("/"));
 		} catch (error) {
 			console.log(error);

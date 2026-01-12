@@ -2,7 +2,6 @@ import Logout from "./logout";
 import Wishlist from "./wishlist";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Swal from "sweetalert2";
 
 function Dashboard({ setIsLoggedIn }) {
 	const [yourWishes, setYourWishes] = useState([]);
@@ -21,9 +20,6 @@ function Dashboard({ setIsLoggedIn }) {
 				setOtherWishes(response.otherWishes);
 			} catch (error) {
 				console.log(error);
-				Swal.fire(
-					"An unexpected error occurred, please try again later"
-				);
 			}
 		};
 		getWishlist();

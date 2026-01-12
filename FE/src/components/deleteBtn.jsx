@@ -8,6 +8,7 @@ function DeleteBtn({ wishId, setRefreshToggle }) {
 			title: "Warning",
 			text: "Do you want to delete this wish?",
 			showCancelButton: true,
+			heightAuto: false,
 		}).then((result) => {
 			if (result.isConfirmed) {
 				handleDeleteWish();

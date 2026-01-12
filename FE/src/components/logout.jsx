@@ -13,6 +13,7 @@ function Logout({ setIsLoggedIn }) {
 			showCancelButton: true,
 			confirmButtonText: "Yes, let me out!",
 			cancelButtonText: "No, I want to stay",
+			heightAuto: false,
 		}).then((result) => {
 			if (result.isConfirmed) {
 				logout();
@@ -34,7 +35,6 @@ function Logout({ setIsLoggedIn }) {
 			navigate("/login");
 		} catch (error) {
 			console.log(error);
-			Swal.fire("An unexpected error occurred, please try again later");
 		}
 	};
 	const username = localStorage.getItem("username");

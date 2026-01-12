@@ -30,6 +30,7 @@ function Signup({ setIsLoggedIn }) {
 				title: "Welcome!",
 				timer: 800,
 				showConfirmButton: false,
+				heightAuto: false,
 			}).then(() => navigate("/"));
 		} catch (error) {
 			switch (error.status) {
