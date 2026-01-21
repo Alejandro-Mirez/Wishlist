@@ -21,6 +21,10 @@ const wishSchema = new mongoose.Schema(
 			ref: "User",
 			default: null,
 		},
+		done: {
+			type: Boolean,
+			default: false,
+		},
 	},
 	{ timestamps: true }
 );

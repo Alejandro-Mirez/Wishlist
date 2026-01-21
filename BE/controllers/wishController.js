@@ -115,7 +115,7 @@ const takeWish = async (req, res) => {
 		const userId = req.userData?.id;
 		if (userId) {
 			const updatedWish = await Wish.findOneAndUpdate(
-				{ _id: wishId },
+				{ _id: wishId, takenBy: null },
 				{ takenBy: userId, state: "taken" },
 				{ new: true }
 			);
@@ -139,7 +139,7 @@ const freeWish = async (req, res) => {
 		const userId = req.userData?.id;
 		if (userId) {
 			const updatedWish = await Wish.findOneAndUpdate(
-				{ _id: wishId },
+				{ _id: wishId, takenBy: userId },
 				{ takenBy: null, state: "free" },
 				{ new: true }
 			);
@@ -157,6 +157,54 @@ const freeWish = async (req, res) => {
 	}
 };
 
+const checkWish = async (req, res) => {
+	try {
+		const wishId = req.params.id;
+		const userId = req.userData?.id;
+		if (userId) {
+			const updatedWish = await Wish.findOneAndUpdate(
+				{ _id: wishId, takenBy: userId },
+				{ done: true },
+				{ new: true }
+			);
+			return res
+				.status(200)
+				.json({ message: "Wish checked", updatedWish });
+		} else {
+			return res.status(401).json({
+				message: "Invalid or expired token. Please log in again",
+			});
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ message: "Server error: check wish" });
+	}
+};
+
+const uncheckWish = async (req, res) => {
+	try {
+		const wishId = req.params.id;
+		const userId = req.userData?.id;
+		if (userId) {
+			const updatedWish = await Wish.findOneAndUpdate(
+				{ _id: wishId, takenBy: userId },
+				{ done: false },
+				{ new: true }
+			);
+			return res
+				.status(200)
+				.json({ message: "Wish unchecked", updatedWish });
+		} else {
+			return res.status(401).json({
+				message: "Invalid or expired token. Please log in again",
+			});
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ message: "Server error: uncheck wish" });
+	}
+};
+
 module.exports = {
 	getWishes,
 	addWish,
@@ -164,4 +212,6 @@ module.exports = {
 	editWish,
 	takeWish,
 	freeWish,
+	checkWish,
+	uncheckWish,
 };

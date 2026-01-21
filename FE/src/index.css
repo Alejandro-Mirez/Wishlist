@@ -82,6 +82,10 @@ input {
 	border-radius: 8px;
 }
 
+.toBuy {
+	font-size: medium;
+}
+
 .inputs {
 	display: flex;
 	flex-direction: row;
@@ -137,6 +141,10 @@ input {
 	align-items: center;
 }
 
+.crossed {
+	text-decoration: line-through;
+}
+
 .yourWishes {
 	width: 31vw;
 	display: flex;
@@ -152,7 +160,7 @@ input {
 .shoppingList {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	align-items: center;
 	width: 32vw;
 }
 
@@ -192,14 +200,10 @@ input {
 .ownerContainer {
 	padding-left: 0.3rem;
 	margin-bottom: 0.7rem;
+	width: 97%;
 }
 
 .ownerList {
-	margin: 0;
-}
-
-.ownerList,
-li {
 	font-size: large;
 }
 
@@ -407,8 +411,7 @@ input:not(#username, #password) {
 	}
 	.title,
 	.owner,
-	.wishName,
-	.ownerList {
+	.wishName {
 		font-size: xx-large;
 	}
 }

@@ -2,7 +2,6 @@ import Wish from "./wish";
 import ReleaseBtn from "./releaseBtn";
 import TakeBtn from "./takeBtn";
 import axios from "axios";
-import Swal from "sweetalert2";
 import { createPortal } from "react-dom";
 import { useEffect, useRef } from "react";
 import { handleError } from "../errorHandler";

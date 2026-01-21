@@ -9,14 +9,47 @@ import AddWish from "./addWishForm";
 import ShoppingList from "./shoppingList";
 import Links from "./links";
 import { handleError } from "../errorHandler";
+import { useEffect } from "react";
 
 function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 	const userId = localStorage.getItem("userId");
 	const [editingWishId, setEditingWishId] = useState(null);
 	const [showAddWishForm, setShowAddWishForm] = useState(false);
 	const [showUserWishes, setShowUserWishes] = useState(null);
+	const [otherWishesState, setOtherWishesState] = useState(otherWishes);
 
-	const groupedWishes = otherWishes.reduce((acc, wish) => {
+	useEffect(() => {
+		setOtherWishesState(otherWishes);
+	}, [otherWishes]);
+
+	const handleToggleWish = async (wishId) => {
+		const wish = otherWishesState.find((w) => w._id === wishId);
+		if (!wish) return;
+
+		const nextDone = !wish.done;
+
+		try {
+			const res = await axios.put(
+				`http://localhost:3002/wishes/${wishId}/${
+					nextDone ? "check" : "uncheck"
+				}`,
+				{},
+				{ withCredentials: true }
+			);
+
+			const updatedWish = res.data.updatedWish;
+
+			setOtherWishesState((prev) =>
+				prev.map((w) =>
+					w._id === wishId ? { ...w, done: updatedWish.done } : w
+				)
+			);
+		} catch (error) {
+			handleError(error);
+		}
+	};
+
+	const groupedWishes = otherWishesState.reduce((acc, wish) => {
 		const owner = wish.owner.username;
 		if (!acc[owner]) {
 			acc[owner] = [];
@@ -184,7 +217,11 @@ function Wishlist({ yourWishes, otherWishes, setRefreshToggle }) {
 					</div>
 				</div>
 
-				<ShoppingList groupedWishes={groupedWishes} userId={userId} />
+				<ShoppingList
+					groupedWishes={groupedWishes}
+					userId={userId}
+					onToggleWish={handleToggleWish}
+				/>
 			</div>
 			<Links />
 		</div>
