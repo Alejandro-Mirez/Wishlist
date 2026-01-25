@@ -33,6 +33,7 @@ function Logout({ setIsLoggedIn }) {
 			);
 			setIsLoggedIn(false);
 			localStorage.removeItem("userId");
+			localStorage.removeItem("username");
 			navigate("/login");
 		} catch (error) {
 			handleError(error);
